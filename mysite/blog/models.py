@@ -10,10 +10,17 @@ class UserInfo(models.Model):
     phone = models.CharField(max_length=20)
 
 
+    def __str__(self):
+        return self.username
+
+
 # 定义博客类
 class BlogInfo(models.Model):
     title = models.CharField(max_length=50)
     content = models.CharField(max_length=512)
     createTime = models.DateTimeField()
     createBy = models.ForeignKey(UserInfo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
 
