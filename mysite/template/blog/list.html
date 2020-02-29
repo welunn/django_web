@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表页面</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <h2>列表页面</h2>
+    <a href="{% url 'blog:adduser' %}">添加用户</a>
+    <table class="userList">
+       <!-- <caption>
+            <button onclick="addUser()">添加用户</button>
+        </caption>-->
+        <thead>
+        <tr>
+            <th>用户编号</th>
+            <th>用户姓名</th>
+            <th>用户性别</th>
+            <th>用户电话</th>
+            <th>用户操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }} -- {{ forloop.counter}}</td>
+                <td>{{ user.username }}</td>
+                <td> {{user.gender}}
+                    {% if user.gender %}
+                        男
+                    {% else %}
+                        女
+                    {% endif %}
+                </td>
+                <td>{{ user.phone }}</td>
+                <td>
+                    <a href="{% url 'blog:detail' user.id %}">详细</a>
+                    <a href="{% url 'blog:delete' user.id %}">删除</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'blog:index' %}"> 返回首页 </a>
+</body>
+</html>

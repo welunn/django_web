@@ -1,0 +1,22 @@
+div.container{
+    margin:0 auto;
+    width:1200px;
+    background-color:#8ce647;
+}
+
+div.div_img{
+    width:750px;
+    margin: 0 auto;
+}
+
+table.userList{
+    width:800px;
+    height:auto;
+    border: 1px solid grey;
+    border-collapse: collapse;
+}
+table.userList tr th,td{
+    height:50px;
+    border: 1px solid grey;
+    text-align: center;
+}

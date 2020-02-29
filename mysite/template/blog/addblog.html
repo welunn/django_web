@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加博客信息</title>
+</head>
+<body>
+    <h2>添加博客信息</h2>
+    <form action="{% url 'blog:addblog' user.id %}" method="post">
+        博客标题： <input type="text" name="title"><br>
+        博客内容： <textarea name="content" id="content" cols="30" rows="10"></textarea><br>
+        博客作者： <label for="username">{{user.username}}</label><br>
+        <input type="submit" value="发布博客">
+    </form>
+</body>
+</html>

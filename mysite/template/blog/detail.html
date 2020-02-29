@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页面</title>
+</head>
+<body>
+    <h2>详情页面</h2>
+    <div>
+        <label for="{{ user.id }}">用户编号： {{ user.id }}</label><br/>
+        <label for="{{ user.username }}">用户名称： {{ user.username }}</label><br/>
+        <label for="{{ user.gender }}">用户性别： {{ user.gender }}</label><br/>
+        <label for="{{ user.age }}">用户年龄： {{ user.age }}</label><br/>
+        <label for="{{ user.phone }}">用户电话： {{ user.phone }}</label><br/>
+    </div>
+    <p><a href="{% url 'blog:addblog' user.id %}">添加博客</a></p>
+    {% if user.bloginfo_set.all %}
+    <p>已发布的博客信息</p>
+    <ul>
+        {% for blog in user.bloginfo_set.all %}
+            <li>
+                博客标题：{{blog.title}}<br>
+                博客内容：{{blog.content}}
+                <a href="{% url 'blog:deleteblog' blog.id %}">删除</a>
+            </li>
+        {% empty %}
+            <p>没有发布博客信息</p>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>没有发布博客信息</p>
+    {% endif %}
+    <p><a href="{% url 'blog:list' %}">返回列表</a></p>
+</body>
+</html>
