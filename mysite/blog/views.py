@@ -1,5 +1,5 @@
 import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import UserInfo, BlogInfo
 from django.template import loader
@@ -45,7 +45,8 @@ def adduser(request):
         userInfo.age = request.POST.get("age")
         userInfo.phone = request.POST.get("phone")
         userInfo.save()
-        return HttpResponseRedirect("/list")
+        # return HttpResponseRedirect("/list")
+        return redirect(reverse("blog:list"))
 
 
 # 用户详细页面
@@ -66,7 +67,8 @@ def delete(request, id):
     userInfo = UserInfo.objects.get(pk=id)
     userInfo.delete()
 
-    return HttpResponseRedirect("/list/")
+    # return HttpResponseRedirect("/list/")
+    return redirect(reverse("blog:list"))
 
 
 # 添加博客
@@ -86,11 +88,13 @@ def addblog(request, id):
         # 把博客信息保存到数据库
         blog.save()
         # 重定向到用户详细及博客列表显示页面
-        return HttpResponseRedirect("/detail/%s"%(id))
+        # return HttpResponseRedirect("/detail/%s"%(id))
+        return redirect(reverse("blog:detail", args=(id,)))
 
 
 # 删除博客信息
 def deleteblog(request, id):
     blog = BlogInfo.objects.get(pk=id)
     blog.delete()
-    return HttpResponseRedirect("/detail/%s"%(blog.createBy.id))
+    # return HttpResponseRedirect("/detail/%s"%(blog.createBy.id))
+    return redirect(reverse("blog:detail", args=(blog.createBy.id,)))
