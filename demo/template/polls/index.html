@@ -1,0 +1,31 @@
+{% extends "polls\base.html" %}
+{% block title%}
+    首页
+{% endblock%}
+{% block link %}
+<link rel="stylesheet" href="/static/css/main.css">
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/main.js"></script>
+{% endblock %}
+
+{% block body %}
+    <h2>欢迎进入投票页面</h2>
+    <ul>
+        {% for q in questions %}
+            <li><a href="/detail/{{q.id}}">{{q.title}}</a> {{q.create_time|date:'yy年m月d日 h:m:s'}}</li>
+        {% endfor %}
+    </ul>
+
+    {% include "polls/footer.html" %}
+
+    {{ name|upper|lower }}
+    {# 这里是注释的内容 #}
+
+    {{ questions|join:"#"}}
+    <br>
+    {% autoescape off%}
+    {{ info }}
+    {% endautoescape%}
+{% endblock %}
