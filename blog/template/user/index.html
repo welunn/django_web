@@ -1,0 +1,11 @@
+{% extends 'user/base.html' %}
+
+{% block title%} 用户管理系统 {% endblock %}
+{% block body %}
+    <h2>用户管理系统首页</h2>
+    {% if request.user and request.user.is_authenticated %}
+        {{ user.username }}
+        <br>
+        <a href="{% url 'user:logout' %}">退出</a>
+    {% endif %}
+{% endblock %}
