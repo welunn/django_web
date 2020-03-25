@@ -1,9 +1,35 @@
 {% extends 'user/base.html '%}
 {% block title %} 用户登录注册页面 {% endblock %}
 
+{% block script %}
+<script type="text/javascript">
+    $(function(){
+         $("#id_username").blur(function(){
+            $.ajax({
+                type:'get',
+                url: '/user/checkname/?username=' + $("#id_username").val(),
+                success: function(data){
+                    if(data.statecode == '0'){
+                        $("#infomsg").text(data.msg)
+                    }else{
+                        $("#infomsg").text(data.msg)
+                    }
+                }
+            })
+         });
+
+         $("#verity_img").click(function(){
+            $("#verity_img").attr("src","/user/verify/?t=" + new Date().getTime());
+         })
+    })
+
+</script>
+
+{% endblock%}
+
 {% block body %}
     <h2>用户登录注册页面</h2>
-    <h3>{{ errorMessage }}</h3>
+    <h3><div id="infomsg" style="color:red">{{ errorMessage }}</div></h3>
     <div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
@@ -16,6 +42,8 @@
             <form action="{% url 'user:login' %}" method="post">
                 {% csrf_token %}
                 {{lf}}
+                <label for="id_verify">验证码:</label><img id="verity_img" src="{% url 'user:verify' %}" alt="" width="100" height="35">
+                <input type="text" name="verify" class="form-control" maxlength="150" required="" id="id_verify">
                 <button type="submit" class="btn btn-default">登录</button>
             </form>
         </div>
