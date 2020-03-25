@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统首页</title>
+</head>
+<body>
+
+    <h1>欢迎使用Django Web框架</h1>
+
+    <!-- 接收 Python 后端 通过 context 传递过来的参数 -->
+
+    <p>
+        <!-- 疫情信息的展示  -->
+
+        <table border="1">
+
+            <tr>
+                <th>区域</th>
+                <th>今日新增确诊人数</th>
+                <th>今日新增疑似人数</th>
+                <th>确诊总人数</th>
+            </tr>
+
+
+
+
+            {% for epidemic  in epidemic_list %}
+
+            <tr>
+                <td>{{ epidemic.name }}</td>
+                <td>{{ epidemic.addCon }}</td>
+                <td>{{ epidemic.addDon }}</td>
+                <td>{{ epidemic.sum }}</td>
+            </tr>
+
+
+            {% endfor %}
+
+        </table>
+
+    </p>
+
+</body>
+</html>

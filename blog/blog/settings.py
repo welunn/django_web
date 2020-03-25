@@ -38,13 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
+    'epidemic',
+    'article',
+    'comments',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -122,3 +126,39 @@ STATIC_URL = '/static/'
 
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media/')
+
+
+# 设置富文本编辑器
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 600,
+    'height': 500,
+}
+
+
+# 设置邮件服务器
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.qq.com'
+# EMAIL_PORT = 110  # 或者 995 是设置了 SSL 加密方式
+# #发送邮件的邮箱
+# EMAIL_HOST_USER = '36077155@qq.com'
+# #在邮箱中设置的客户端授权密码
+# # 如果重新设置了新的授权码,直接使用最新的授权码即可
+# EMAIL_HOST_PASSWORD = 'Wzhw3769656320'
+# # 这里必须是 True，否则发送不成功
+# EMAIL_USE_TLS = True
+# #收件人看到的发件人
+# EMAIL_FROM = 'Tencent<36077155@qq.com>'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True #是否使用TLS安全传输协议(用于在两个通信应用程序之间提供保密性和数据完整性。)
+EMAIL_USE_SSL = False #是否使用SSL加密，qq企业邮箱要求使用
+EMAIL_HOST = 'smtp.163.com' #发送邮件的邮箱 的 SMTP服务器，这里用了163邮箱
+EMAIL_PORT = 25 #发件箱的SMTP服务器端口
+EMAIL_HOST_USER = 'welun521@163.com' #发送邮件的邮箱地址
+EMAIL_HOST_PASSWORD = '********' #自己的邮箱密码
+DEFAULT_FROM_EMAIL = 'wangzhenwei <welun521@163.com>'

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发送邮件</title>
+    <style>
+        .container{
+            margin: 0 auto;
+            width:800px;
+        }
+        .input-submit{
+            width:380px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>邮件系统</h2>
+        {{msg}}
+        <form action="{% url 'article:sendmail' %}" method="post">
+            {% csrf_token %}
+
+            收件地址：<input type="text" name="toEmail" class="input-submit"/><br>
+            邮件主题：<input type="text" name="subject" class="input-submit"/><br>
+            邮件内容：<textarea cols="50" rows="10" name="content" class="input-submit"></textarea><br>
+            <input type="submit" value="发送" class="input-submit"/>
+        </form>
+    </div>
+</body>
+</html>

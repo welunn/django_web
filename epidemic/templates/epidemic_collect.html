@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>疫情信息收集页面</title>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/regions.js"></script>
+</head>
+<body>
+
+    <form action="/add_epidemic/" method="post">
+        {% csrf_token %}
+        <p>
+            <label>疫情发生地区</label>
+            <select id="sel" name="region"></select>
+        </p>
+
+        <p>
+            <label>今日新增确诊病例</label>
+            <input type="number" name="addCon" />
+        </p>
+
+         <p>
+            <label>今日新增疑似病例</label>
+            <input type="number" name="addDon" />
+        </p>
+
+        <p>
+            <input type="submit" value="疫情信息提交" />
+        </p>
+
+    </form>
+
+    <script>
+
+        $(function() {
+            // 初始化 所有的省份
+            for(let i=0; i<regions.length; i++) {
+                let region = regions[i];
+                //let code = region.code ;
+                let name = region.name ;
+                $("#sel").append("<option value='"+ name + "'>"+ name + "</option>")
+            }
+
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>美女与资源分布图</title>
+    <script src="/static/js/echarts.min.js"></script>
+    <style>
+        .container{
+            width: 1200px;
+            height: 600px;
+
+        }
+
+        .left{
+            width: 600px;
+            height: 500px;
+            border: 1px solid grey;
+        }
+        .right{
+            width: 600px;
+            height: 500px;
+            border: 1px solid grey;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div id="main" class="left">
+
+        </div>
+        <h2>论鸡鸡的每日硬度及长度比率(纯属虚构)</h2>
+        <div id="main2" class="right">
+
+        </div>
+        <h2>下周股市曲线图</h2>
+        <div id="main3" class="right">
+
+        </div>
+
+
+        <br>
+    </div>
+
+    <script>
+        // 绘制图表。
+       var options = {
+                series:{
+                    type: 'pie',
+                    data: [
+                        {name: 'others->张帆', value: 5000},
+                        {name: '涛哥', value: 2000},
+                        {name: '贱贱', value: 1500},
+                        {name: '吹箫', value: 1000},
+                        {name: '蒋老师', value: 2000},
+                        {name: '板板', value: 1500},
+                        {name: '黄老师', value: 1000},
+                        {name: '阿伟', value: 1000}
+                    ]
+                }
+            }
+
+        echarts.init(document.getElementById('main')).setOption(options);
+
+
+        var option = {
+
+            color: ['red'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: [30, 52, 200, 334, 390, 330, 220]
+                }
+            ]
+        };
+
+        echarts.init(document.getElementById('main2')).setOption(option);
+
+        var option2 = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [2860, 2887, 3031, 3001,2950 ],
+                type: 'line'
+            }]
+        };
+
+        echarts.init(document.getElementById('main3')).setOption(option2);
+    </script>
+</body>
+</html>

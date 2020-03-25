@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统首页</title>
+
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <!-- echarts 安装 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.6.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.6.0/map/js/china.js"></script>
+
+</head>
+<body>
+
+    <div id="main" style="width:1000px; height:600px;border:1px solid red;margin:0 auto;"></div>
+
+
+    <script>
+        var charts = echarts.init(document.getElementById("main"))
+
+        var options = {
+            title: {
+                text: "中国各省最新疫情信息统计",
+                subtext: "疫情确诊人数"
+            },
+            tooltip: {
+                 trigger: 'item',
+            },
+            visualMap:[{
+                type: 'piecewise',
+                show:true,
+                pieces: [
+                    {min: 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
+                    {min: 900, max: 1500},
+                    {min: 310, max: 1000},
+                    {min: 200, max: 300},
+                    {min: 10, max: 200},
+                    {max: 10}
+                ],
+                inRange: {
+                    symbol: 'rect',
+                    color: ["#f7f7f7", "#9c0505"]
+                }
+
+            }],
+            series: [{
+                 type: 'map',
+                 map: 'china',
+                 name: "确诊人数",
+                 //roam:true,
+                 label: {
+                     show:true,
+                     fontSize:10,
+                     color:'#000'
+                 },
+                 itemStyle: {
+                    // areaColor: '#333',
+                     borderColor:'green'
+                 },
+                 emphasis: {
+                     label: {
+                         show:false,
+                     }
+                 },
+                 data: [{name:"广东", value:10}]
+            }]
+        } ;
+
+
+        // 把数据，通过异步请求的方式 查询查来
+
+        $.ajax({
+            url: 'http://127.0.0.1:8000/epidemic/',
+            type:'GET',
+            dataType: 'json',
+            success: function(data) {
+                options.series[0].data = data ;
+                charts.setOption(options)
+            }
+        })
+
+    </script>
+</body>
+</html>
